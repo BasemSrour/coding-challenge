@@ -71,11 +71,13 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
+    'django_filters',
 ]
 
 LOCAL_APPS = [
     "coding_challenge.users.apps.UsersConfig",
     # Your stuff: custom apps go here
+    "coding_challenge.cities.apps.CitiesConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
