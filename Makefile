@@ -7,7 +7,7 @@ build:
 	docker-compose -f local.yml build
 
 run:
-	docker-compose -f local.yml run $(filter-out $@,$(MAKECMDGOALS))
+	docker-compose -f local.yml run --rm --service-ports django
 
 shell:
 	docker-compose -f local.yml run --rm django python manage.py shell_plus
