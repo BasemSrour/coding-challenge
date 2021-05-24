@@ -3,6 +3,9 @@ upbuild: build up
 up:
 	docker-compose -f local.yml up
 
+backUp:
+	docker-compose -f local.yml up -d
+
 down:
 	docker-compose -f local.yml down
 
