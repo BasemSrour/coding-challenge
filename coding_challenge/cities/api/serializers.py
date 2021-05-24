@@ -3,11 +3,7 @@ from math import atan2, cos, radians, sin, sqrt
 from rest_framework import serializers
 
 from coding_challenge.cities.models import City
-from coding_challenge.cities.utils import (
-    cal_dis,
-    get_score_with_lat_and_long,
-    get_score_without_lat_and_long,
-)
+from coding_challenge.cities.utils import cal_dis, get_score
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -39,12 +35,9 @@ class CitySerializer(serializers.ModelSerializer):
         # Make it default to 2 if no search done
         score = 2
 
-        if searched_lat and searched_long:
-            score = get_score_with_lat_and_long(distance)
-        elif searched_name:
-            score = get_score_without_lat_and_long(distance)
-            if searched_lat == current_object_lat or searched_long == current_object_long:
-                if score + 0.5 <= 1:
-                    score += 0.4
+        score = get_score(
+            distance, searched_lat, current_object_lat,
+            searched_long, current_object_long
+        )
         
         return score

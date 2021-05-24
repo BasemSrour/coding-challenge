@@ -13,7 +13,7 @@ class CitiesAutoComplete(ListAPIView):
 
     def get_queryset(self):
         """
-        Get the query sorted due to the distance
+        Get the query of the first ten sorted due to the distance
         in ascending order
         """
         filters = {}
@@ -28,4 +28,4 @@ class CitiesAutoComplete(ListAPIView):
         current_long = F('longitude')
         d = cal_distance(current_lat, current_long, searched_lat, searched_long)
 
-        return City.objects.annotate(distance=d).order_by('distance').filter(**filters)
+        return City.objects.annotate(distance=d).order_by('distance').filter(**filters)[:10]
