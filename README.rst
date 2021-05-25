@@ -8,7 +8,7 @@ coding-challenge
 
 * but you need to setup your databse first by looking at Setting Up Your databse section
 
-* Look at the example for useage section to understand more
+* Look at the example for usage section to understand more
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
      :target: https://github.com/pydanny/cookiecutter-django/
