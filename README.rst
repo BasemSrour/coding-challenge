@@ -1,10 +1,12 @@
 coding-challenge
 ================
 
-Coding Challenge Project with a REST API app for large cities
-It is used basically for making suggestions for the users with their search for cities
-with thier names, latitudes and longitudes provided in the url parmaetars to search with
-but you need to setup your databse first by looking at Setting Up Your databse section
+* Coding Challenge Project with a REST API app for large cities.
+
+* It is used basically for making suggestions for the users with their search for cities
+  with thier names, latitudes and longitudes provided in the url parmaetars to search with
+
+* but you need to setup your databse first by looking at Setting Up Your databse section
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -14,6 +16,70 @@ but you need to setup your databse first by looking at Setting Up Your databse s
      :alt: Black code style
 
 :License: MIT
+
+
+Example for usage
+^^^^^^^^^^^^^^^^^^^^^
+* Near match
+GET /api/cities/suggestions/?q=Londo&latitude=43.70011&longitude=-79.416
+[
+    {
+        "name": "London",
+        "symbol": "8",
+        "country": "CA",
+        "latitude": 42.98339,
+        "longitude": -81.23304,
+        "population": 346765,
+        "timeZone": "America/Toronto",
+        "score": 1.0
+    },
+    {
+        "name": "London",
+        "symbol": "OH",
+        "country": "US",
+        "latitude": 39.88645,
+        "longitude": -83.44825,
+        "population": 9904,
+        "timeZone": "America/New_York",
+        "score": 0.8
+    },
+    {
+        "name": "Londontowne",
+        "symbol": "MD",
+        "country": "US",
+        "latitude": 38.93345,
+        "longitude": -76.54941,
+        "population": 8018,
+        "timeZone": "America/New_York",
+        "score": 0.8
+    },
+    {
+        "name": "New London",
+        "symbol": "WI",
+        "country": "US",
+        "latitude": 44.39276,
+        "longitude": -88.73983,
+        "population": 7295,
+        "timeZone": "America/Chicago",
+        "score": 0.7
+    },
+    {
+        "name": "London",
+        "symbol": "KY",
+        "country": "US",
+        "latitude": 37.12898,
+        "longitude": -84.08326,
+        "population": 7993,
+        "timeZone": "America/New_York",
+        "score": 0.6
+    }
+]
+
+* No match
+GET /api/cities/suggestions?q=SomeRandomCityInTheMiddleOfNowhere
+
+[]
+
 
 Settings
 --------
