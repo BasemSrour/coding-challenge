@@ -2,6 +2,9 @@ coding-challenge
 ================
 
 Coding Challenge Project with a REST API app for large cities
+It is used basically for making suggestions for the users with their search for cities
+with thier names, latitudes and longitudes provided in the url parmaetars to search with
+but you need to setup your databse first by looking at Setting Up Your databse section
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -30,28 +33,13 @@ Setting Up Your Users
 * To create an **superuser account**, use this command::
 
     $ make createsuperuser
-    or
-    $ sudo make createsuperuser
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
-Type checks
-^^^^^^^^^^^
+Setting Up Your databse
+^^^^^^^^^^^^^^^^^^^^^
 
-Running type checks with mypy:
-
-::
-
-  $ mypy coding_challenge
-
-Test coverage
-^^^^^^^^^^^^^
-
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+* You have first to run the data_population.py file first in the bash and have the csv file with the same folder that data_population.py exists.
 
 Running tests with py.test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,8 +47,6 @@ Running tests with py.test
 ::
 
   $ make test
-  or
-  $ sudo make test
 
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
