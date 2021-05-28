@@ -18,21 +18,19 @@ def populate():
             latitude = row["lat"].strip()
             longitude = row["long"].strip()
             population = row["population"].strip()
-            timeZone = row["tz"].strip()
-            city = add_city(name, symbol, country, latitude, longitude, population, timeZone)
+            city = add_city(name, symbol, country, latitude, longitude, population)
     
     for city in City.objects.all():
         print(f"City {str(city)} added")
 
-def add_city(name, symbol, country, latitude, longitude, population, timeZone):
+def add_city(name, symbol, country, latitude, longitude, population):
     city = City.objects.get_or_create(
         name=name,
         symbol=symbol,
         country=country,
         latitude=latitude,
         longitude=longitude,
-        population=population,
-        timeZone=timeZone
+        population=population
     )[0]
     city.save()
     return city

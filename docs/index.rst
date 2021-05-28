@@ -13,6 +13,7 @@ Welcome to coding-challenge's documentation!
    howto
    pycharm/configuration
    users
+   cities
 
 
 

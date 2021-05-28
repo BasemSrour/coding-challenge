@@ -43,7 +43,24 @@ For convenience, you can keep your normal user logged in on Chrome and your supe
 Setting Up Your databse
 ^^^^^^^^^^^^^^^^^^^^^
 
-* You have first to run the data_population.py file first in the bash and have the csv file with the same folder that data_population.py exists.
+* You have first to run the data_population.py file first in the bash and have the csv file with the same directory that data_population.py exists.
+* The CSV file have to have the same order as in the data_population.py file extracte them.
+
+::
+
+  $ make bash
+  # python data_population.py
+  Populating the data from the CSV file
+  .
+  .
+  .
+  City East La Mirada added
+  City Holtville added
+  City Rialto added
+  City Guymon added
+  City Stayton added
+  City South Jordan added
+  City Kelso added
 
 Running tests with py.test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,13 +68,6 @@ Running tests with py.test
 ::
 
   $ make test
-
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Moved to `Live reloading and SASS compilation`_.
-
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
 
 Example for usage
 ------------------
@@ -119,10 +129,18 @@ GET /api/cities/suggestions/?q=Londo&latitude=43.70011&longitude=-79.416
   ]
 
 * No match
-GET /api/cities/suggestions?q=SomeRandomCityInTheMiddleOfNowhere
+GET /api/cities/suggestions/?q=SomeRandomCityInTheMiddleOfNowhere
 ::
 
   []
+
+
+Documentation
+------------------
+::
+
+  $ make docsup
+Navigate to port 7000 on your host to see the documentation.
 
 Deployment
 ----------

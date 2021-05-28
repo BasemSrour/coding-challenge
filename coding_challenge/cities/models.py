@@ -11,7 +11,6 @@ class City(models.Model):
     latitude = models.FloatField(_("Latitude")) # lat in CSV file
     longitude = models.FloatField(_("Longitude")) # long in CSV file
     population = models.IntegerField(_("Poplation")) # population in CSV file
-    timeZone = models.CharField(_("Time Zone"), max_length=32) # tz in CSV file
 
     class Meta:
         app_label = 'cities'

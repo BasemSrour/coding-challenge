@@ -273,5 +273,3 @@ coding_challenge/media/
 
 .ipython/
 .env
-.envs/*
-!.envs/.local/

@@ -1,9 +1,9 @@
-upbuild: build up
+buildup: build up
 
 up:
 	docker-compose -f local.yml up
 
-backUp:
+upback:
 	docker-compose -f local.yml up -d
 
 down:
@@ -35,3 +35,6 @@ urls:
 
 test:
 	docker-compose -f local.yml run --rm django pytest
+
+docsup:
+	docker-compose -f local.yml up docs

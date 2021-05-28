@@ -3,7 +3,26 @@ from math import atan2, cos, radians, sin, sqrt
 from django.db.models.functions import ATan2, Cos, Power, Radians, Sin, Sqrt
 
 
-def cal_distance(current_lat, current_long, searched_lat, searched_long):
+def calculate_distance1(point1, point2):
+    """
+    Giving two points using Haversine distance
+
+    Calculate the distance with the api view class that is used for suggestions endpoint.
+    and filter the view using Django's Database functions.
+
+    Note: Used only with view to avoid CombinedExpression errors which is generated when using with serailizer
+
+    Writing it out with Django's Database functions.
+    In contrast to raw SQL,
+    this also gives the advantage of being able to easily append/prepend other ORM filters.
+    """
+
+    # Assign the vlues to these called variables to reflect the function's usage
+    current_lat = point1[0]
+    current_long = point1[1]
+    searched_lat = point2[0]
+    searched_long = point2[1]
+
     dlat = Radians(current_lat - searched_lat)
     dlong = Radians(current_long - searched_long)
 
@@ -14,7 +33,21 @@ def cal_distance(current_lat, current_long, searched_lat, searched_long):
     d = 6371 * c
     return d
 
-def cal_dis(current_lat, current_long, searched_lat, searched_long):
+def calculate_distance2(point1, point2):
+    """
+    Giving two points using Haversine distance.
+
+    Note: Calculate the distance with the serializer class that is used for suggestions endpoint
+    and get the score from the distance calculated from get_score method
+    which can't be done using the previous method avoding to some errors and complexties.
+    """
+
+    # Assign the vlues to these called variables to reflect the function's usage
+    current_lat = point1[0]
+    current_long = point1[1]
+    searched_lat = point2[0]
+    searched_long = point2[1]
+
     dlat = radians(searched_lat - current_lat)
     dlon = radians(searched_long - current_long)
 
@@ -29,6 +62,15 @@ def get_score(
     searched_long=None, current_object_long=None
 ):
     """
+    Given: distance, searched_lat, current_object_lat,
+    searched_long, current_object_long
+    Evaluate score due to the distance range
+    And increase it if the provided searched lat or long is exact to the current object lat or long
+    
+    Make the score number with respect to the nearest distances
+    As the nearest has the highest score and as the distance is bigger
+    the score is smaller
+    
     These the quite good distances that I found from searching and testing
     """
     # When there is no lat or long provied
@@ -39,26 +81,22 @@ def get_score(
 
     # Evaluate score due to the distance range
     score = 0.0
-    if distance <= 200:
-        score = 1.0
-    elif 200 < distance <= 400:
-        score = 0.9
-    elif 400 < distance <= 600:
-        score = 0.8
-    elif 600 < distance <= 800:
-        score = 0.7
-    elif 800 < distance <= 1000:
-        score = 0.6
-    elif 1000 < distance <= 1200:
-        score = 0.5
-    elif 1200 < distance <= 1400:
-        score = 0.4
-    elif 1400 < distance <= 3000:
-        score = 0.3
-    elif 3000 < distance <= 4000:
-        score = 0.2
-    elif distance > 4000:
-        score = 0.1
+    score_distance_ranges = {
+        1.0: (0, 200),
+        0.9: (200, 400),
+        0.8: (400, 600),
+        0.7: (600, 800),
+        0.6: (800, 1000),
+        0.5: (1000, 1200),
+        0.4: (1200, 1400),
+        0.3: (1400, 3000),
+        0.2: (3000, 4000),
+        0.1: (4000, 5000)
+    }
+    for score, distance_range in score_distance_ranges.items():
+        if distance_range[0] < distance <= distance_range[1]:
+            score=score
+            break
     
     # If the searched lat or long is exact to the current object lat or long
     if searched_lat == current_object_lat or searched_long == current_object_long:

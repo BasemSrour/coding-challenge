@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import CitiesAutoComplete
+from .views import CitiesSuggestions
 
 urlpatterns = [
-    path("suggestions/", view=CitiesAutoComplete.as_view(), name="cities-suggestions"),
+    path("suggestions/", view=CitiesSuggestions.as_view(), name="cities-suggestions"),
 ]
